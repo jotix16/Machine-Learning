@@ -31,7 +31,7 @@ def evaluate_fraction(data, fraction, monktest):
     for i in range(2000):
         monktrain, monkval = partition(data, fraction)
         t=dtree.buildTree(monktrain, monkdata.attributes)
-        res[i]=dtree.check(prune(t, monkval),monktest)
+        res[i]=1-dtree.check(prune(t, monkval),monktest)
     return res
 
 def main():
@@ -79,11 +79,11 @@ def main():
 
     print("*** Train and test set errors")
     t1=dtree.buildTree(monkdata.monk1, monkdata.attributes)
-    print("*** Monk1:", "Etrain=",dtree.check(t1, monkdata.monk1), " Etest=",dtree.check(t1, monkdata.monk1test))
+    print("*** Monk1:", "Etrain=",1-dtree.check(t1, monkdata.monk1), " Etest=",1-dtree.check(t1, monkdata.monk1test))
     t2=dtree.buildTree(monkdata.monk2, monkdata.attributes)
-    print("*** Monk2:", "Etrain=",dtree.check(t2, monkdata.monk2), " Etest=",dtree.check(t2, monkdata.monk2test))
+    print("*** Monk2:", "Etrain=",1-dtree.check(t2, monkdata.monk2), " Etest=",1-dtree.check(t2, monkdata.monk2test))
     t3=dtree.buildTree(monkdata.monk3, monkdata.attributes)
-    print("*** Monk3:", "Etrain=",dtree.check(t3, monkdata.monk3), " Etest=",dtree.check(t3, monkdata.monk3test))
+    print("*** Monk3:", "Etrain=",1-dtree.check(t3, monkdata.monk3), " Etest=",1-dtree.check(t3, monkdata.monk3test))
     
     import drawtree_qt5
     #print(t1) # tree in text form(weird)
@@ -95,11 +95,11 @@ def main():
     print("Assignement 7")
 
     # The prunning for the exanple of monk1
-    monk1train, monk1val = partition(monkdata.monk1, 0.6)
+    monk1train, monk1val = partition(monkdata.monk1, 0.9)
     t1=dtree.buildTree(monk1train, monkdata.attributes) # tree trained from monk1train
     t11 = prune(t1, monk1val) # prunned tree
-    #print("*** Monk1:", "Etrain=",dtree.check(t1, monk1val), " Etest=",dtree.check(t1, monkdata.monk1test))
-    #print("*** Monk1:", "Etrain=",dtree.check(t11, monk1val), " Etest=",dtree.check(t11, monkdata.monk1test))
+    print("*** Monk1:", "Etrain=",1-dtree.check(t1, monk1val), " Etest=",1-dtree.check(t1, monkdata.monk1test))
+    print("*** Monk1:", "Etrain=",1-dtree.check(t11, monk1val), " Etest=",1-dtree.check(t11, monkdata.monk1test))
 
 
     # Statistic information for different fraction for monk1 and monk3
